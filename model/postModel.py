@@ -7,3 +7,7 @@ def post(article_id,title,content,account):
     print(sqlstr)
     return DB.execution(DB.create, sqlstr)
 
+'''def delPost(article_id,title,content,account):
+    sqlstr = "delete * from article" % ()
+    print(sqlstr)
+    return DB.execution(DB.create, sqlstr)'''

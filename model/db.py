@@ -19,10 +19,10 @@ class DB():
     def delete(self):
         return 3
 
-    __host = '140.131.114.148'
-    __user = 'root'
-    __dbname = 'db'
-    __password = 'ntubimd106'
+    __host = 'remotemysql.com'
+    __user = 'YqwzgfQLW3'
+    __dbname = 'YqwzgfQLW3'
+    __password = 'KJBLXilYZ7'
     __conn = None
 
     @staticmethod

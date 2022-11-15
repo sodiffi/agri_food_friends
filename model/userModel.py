@@ -18,12 +18,12 @@ def changePassword(account, password):
         password, account)
     return DB.execution(DB.update, sqlstr)
 
-# 待修
-# def sign(account, password, age, sex, area, name):
-    # sqlstr = "insert into user(account, password,age,gender,area_id,name) VALUES (\"%s\", \"%s\" ,\"%s\" ,\"%s\",\"%s\",\"%s\")" % (
-    #     account, password, age, sex, area, name)
-    # print(sqlstr)
-    # return DB.execution(DB.create, sqlstr)
+
+def sign(account, password, area, name):
+    sqlstr = "insert into user(account, password,area_id,name) VALUES (\"%s\", \"%s\" ,\"%s\",\"%s\")" % (
+         account, password, area, name)
+    print(sqlstr)
+    return DB.execution(DB.create, sqlstr)
 
 
 def changeProfile(data, account):

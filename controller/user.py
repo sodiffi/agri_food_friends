@@ -125,12 +125,3 @@ def changeProfile():
         result["message"] = "修改成功"
     return Response(json.dumps(result, cls=MyEncoder), mimetype='application/json')
 
-
-@userProfile.route("/msg/<u_id>", methods=["GET"])
-def getMsg(u_id):
-    return ret(proposalModel.msgListByUser(u_id))
-
-
-@userProfile.route("vote/<u_id>", methods=["GET"])
-def getVote(u_id):
-    return ret("")

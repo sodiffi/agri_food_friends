@@ -39,14 +39,14 @@ def login():
 @userProfile.route("/sign", methods=["POST"])
 def sign():
     content = request.json
-    cond = ["account", "password", "age", "sex", "areaid", "name"]
+    cond = ["account", "password", "area_id", "name","usertype_id"]
     result = {"success": False, "message": ""}
     for i in cond:
         if(i not in content.keys()):
             result["message"] += "缺少必要參數 %s\n" % i
     if(result["message"] == ""):
         data = userModel.sign(content["account"], content["password"],
-                              content["age"], content["sex"], content["areaid"], content["name"])
+                              content["area_id"], content["name"], content["usertype_id"])
         print(data)
         if(data["success"]):
             result["message"] = "註冊成功"
@@ -112,7 +112,7 @@ def edit():
 def changeProfile():
     content = request.json
     account = content["account"]
-    cond = ["age", "sex", "areaid"]
+    cond = ["areaid"]
     data = {}
     for i in cond:
         if(i in content.keys()):
@@ -125,12 +125,3 @@ def changeProfile():
         result["message"] = "修改成功"
     return Response(json.dumps(result, cls=MyEncoder), mimetype='application/json')
 
-
-@userProfile.route("/msg/<u_id>", methods=["GET"])
-def getMsg(u_id):
-    return ret(proposalModel.msgListByUser(u_id))
-
-
-@userProfile.route("vote/<u_id>", methods=["GET"])
-def getVote(u_id):
-    return ret("")

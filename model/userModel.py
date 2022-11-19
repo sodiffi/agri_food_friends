@@ -3,7 +3,7 @@ import json
 
 
 def login(account, password):
-    sqlstr = "select * from user where account=\"%s\" and password = md5(\"%s\")" % (
+    sqlstr = "select * from user where account=\"%s\" and password = \"%s\"" % (
         account, password)
     return (DB.execution(DB.select, sqlstr))
 
@@ -19,9 +19,9 @@ def changePassword(account, password):
     return DB.execution(DB.update, sqlstr)
 
 
-def sign(account, password, area, name):
-    sqlstr = "insert into user(account, password,area_id,name) VALUES (\"%s\", \"%s\" ,\"%s\",\"%s\")" % (
-         account, password, area, name)
+def sign(account, password, area_id, name,usertype_id):
+    sqlstr = "insert into user(account, password,area_id,name,usertype_id) VALUES (\"%s\", \"%s\" ,\"%s\",\"%s\",\"%s\")" % (
+         account, password, area_id, name,usertype_id)
     print(sqlstr)
     return DB.execution(DB.create, sqlstr)
 

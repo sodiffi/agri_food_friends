@@ -1,7 +1,8 @@
 from model.db import DB
 import json
 
-def post(article_id,title,content,account):
+#自動產生的artid需要寫入嗎?
+def po(article_id,title,content,account):
     sqlstr = "insert into article(article_id,title,content,account) VALUES (\"%s\", \"%s\" ,\"%s\",\"%s\")" % (
          article_id,title,content,account)
     print(sqlstr)

@@ -7,3 +7,11 @@ from .util import ret
 
 postEdit = Blueprint("post", __name__, url_prefix="/post")
 
+@postEdit.route("/po", methods=["POST"])
+def po():
+    content = request.json
+    title = content['title']
+    content = content["content"]
+    account = content['account']
+    data = postModel.edit(title, content,account)
+    result = {"sucess": False, "data": data}

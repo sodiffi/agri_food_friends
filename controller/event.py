@@ -1,14 +1,14 @@
 from flask import Blueprint, request, Response
-from model import campaignModel
+from model import eventModel
 import json
 from coder import MyEncoder
 from flask import app
 from .util import ret
 
-campaignRec = Blueprint("campaign", __name__, url_prefix="/campaign")
+eventRec = Blueprint("event", __name__, url_prefix="/event")
 
-@campaignRec.route("/insert", methods=["POST"])
-def campaignInsert():
+@eventRec.route("/insert", methods=["POST"])
+def eventInsert():
     content = request.json
     name = content['name']
     start_time = content["start_time"]
@@ -18,14 +18,14 @@ def campaignInsert():
     charge_ppl = content['charge_ppl']
     charge_phone = content['charge_phone']
     source = content['source']
-    data = campaignModel.edit()
+    data = eventModel.edit()
     result = {"sucess": False, "data": data}
 
 
-@campaignRec.route("/search", methods=["GET"])
-def searchCam():
+@eventRec.route("/search", methods=["GET"])
+def searchEve():
     content = request.json
     name = content["name"]
-    data = campaignModel.findUserarea(name)
+    data = eventModel.findUserarea(name)
     return Response(json.dumps(data, cls=MyEncoder), mimetype="application/json")
 

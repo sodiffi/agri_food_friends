@@ -6,7 +6,7 @@ from coder import MyEncoder
 import json
 import sys
 # from model.line import lineModule
-from controller import( user)
+from controller import(user,post,event)
 
 #  ----------------------- 
 
@@ -16,7 +16,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 app.register_blueprint(user.userProfile)
-
+app.register_blueprint(post.postEdit)
 #  ----------------------- 
 
 # CORS(app)

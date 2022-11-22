@@ -7,7 +7,7 @@ from .util import ret
 
 eventRec = Blueprint("event", __name__, url_prefix="/event")
 
-@eventRec.route("/insert", methods=["POST"])
+@eventRec.route("/", methods=["POST"])
 def eventInsert():
     content = request.json
     name = content['name']
@@ -22,7 +22,7 @@ def eventInsert():
     result = {"sucess": False, "data": data}
 
 
-@eventRec.route("/search", methods=["GET"])
+@eventRec.route("/", methods=["GET"])
 def searchEve():
     content = request.json
     name = content["name"]

@@ -47,7 +47,8 @@ def poUpdate():
 @postEdit.route("/",methods=["GET"])
 def show():
     print("here")
-    return ret(postModel.show())
+    d=postModel.show()
+    return ret(d)
 
 @postEdit.route("/mes", methods=["POST"])
 def mes():

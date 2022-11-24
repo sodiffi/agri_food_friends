@@ -64,7 +64,7 @@ def findUserarea():
     return Response(json.dumps(data, cls=MyEncoder), mimetype="application/json")
 
 
-@userProfile.route("/<u_id>",methods=["GET"])
+@userProfile.route("/user/<u_id>",methods=["GET"])
 def getUser(u_id):  
     return ret(userModel.user(u_id))
     

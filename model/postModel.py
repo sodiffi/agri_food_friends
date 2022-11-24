@@ -18,9 +18,9 @@ def edit(title,content,account):
 
 
 def show():
-    sqlstr = "select article.title,article.acc,article.content,article.article_id,message.content as m_c ,message.user_id from article  left join message on article.article_id = message.article_id;"
+    sqlstr = "select article.title,article.acc,article.content,article.article_id,message.content as m_c ,message.user_id ,message.time from article  left join message on article.article_id = message.article_id;"
     data=DB.execution(DB.select, sqlstr)
-    return group_msg(data['data'],["m_c","user_id"],"article_id")
+    return group_msg(data['data'],["m_c","user_id","time"],"article_id")
 
 def like(message_id,account):
     sqlstr ="insert into like(message_id,account) VALUES (\"%s\",\"%s\")" % (

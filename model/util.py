@@ -37,7 +37,10 @@ def group_msg(data,tag,id):
     res=[]
     _d=data[0]
     for d in data:
+       
         if _id!=d[id]:
+            # for t in tag:
+            #     _d=delattr(_d,t)
             _d["msg"]=m_l
             res.append(_d)
             m_l=[]
@@ -45,11 +48,18 @@ def group_msg(data,tag,id):
             _d=d
                  
         m={}
+        check=True
         for t in tag:
+            if d[t]==None:
+                check=False
+                # print("enter none")
+                break
             m[t]=d[t]
-        m_l.append(m)
+        if(check):
+            m_l.append(m)
     _d["msg"]=m_l
-    res.append(d)  
+    res.append(_d)  
+   
     return res
             
 

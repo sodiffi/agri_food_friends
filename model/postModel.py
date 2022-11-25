@@ -3,10 +3,10 @@ import json
 
 from model.util import group_msg
 
-def po(title,content,account,creat_time):
+def po(title,content,account):
     print("this is po")
-    sqlstr = "insert into article(title,content,account,select creat_time,convert_tz(creat_time,'+00:00','+08:00')) VALUES (\"%s\",\"%s\",\"%s\",\"%s\")" % (
-         title,content,account,creat_time)
+    sqlstr = "insert into article(title,content,account) VALUES (\"%s\",\'%s\',\"%s\")" % (
+         title,content,account)
     print(sqlstr)
     return DB.execution(DB.create, sqlstr)
 
@@ -18,8 +18,9 @@ def edit(title,content,account):
 
 
 def show():
-    sqlstr = "select article.title,article.acc,article.content,article.article_id,message.content as m_c ,message.user_id ,message.time from article  left join message on article.article_id = message.article_id;"
+    sqlstr = 'select article.title,article.account,article.creat_time,article.content,article.article_id,message.content  as m_c ,message.user_id  ,message.time  from article  left outer join message on article.article_id = message.article_id;'
     data=DB.execution(DB.select, sqlstr)
+    
     return group_msg(data['data'],["m_c","user_id","time"],"article_id")
 
 def like(message_id,account):
@@ -28,9 +29,9 @@ def like(message_id,account):
     print(sqlstr)
     return DB.execution(DB.create, sqlstr)
 
-def message(id,user_id,content):
-    sqlstr = "insert into message(id,user_id,content) VALUES(\"%s\",\"%s\",\"%s\")" %(
-        id,user_id, content)
+def message(article_id,user_id,content):
+    sqlstr = "insert into message(article_id,user_id,content) VALUES(\"%s\",\"%s\",\"%s\")" %(
+        article_id,user_id, content)
     print(sqlstr)
     return DB.execution(DB.create ,sqlstr)
 

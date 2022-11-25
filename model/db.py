@@ -54,6 +54,7 @@ class DB():
                         connection.commit()
                         return {"success": True}
                     else:
+                        print(sqlstr)
                         cursor.execute(sqlstr)
                         rows = cursor.fetchall()
                         return {"success": True, "data": rows}

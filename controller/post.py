@@ -53,10 +53,10 @@ def show():
 @postEdit.route("/mes", methods=["POST"])
 def mes():
     content = request.json
-    id = content['id']
+    article_id = content['article_id']
     user_id = content['user_id']
     con = content['content']
-    data = postModel.message(id,user_id,con)
+    data = postModel.message(article_id,user_id,con)
     return ret(data)
 
 

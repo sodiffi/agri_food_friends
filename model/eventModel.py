@@ -1,4 +1,4 @@
-from model.sqldb import DB
+# from model.sqldb import DB
 import json
 
 def insert(name,start_time,end_time,location,content,charge_ppl,charge_phone,source):

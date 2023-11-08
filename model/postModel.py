@@ -1,10 +1,10 @@
-# from model.sqldb import DB
-import json
+from model.db import mongo
 
 from model.util import group_msg
 
-def po(title,content,account):
-    pass
+
+def po(item):
+    return mongo.db.post.insert_one(item)
     # print("this is po")
     # sqlstr = "insert into article(title,content,account) VALUES (\"%s\",\'%s\',\"%s\")" % (
     #      title,content,account)
@@ -12,7 +12,7 @@ def po(title,content,account):
     # return DB.execution(DB.create, sqlstr)
 
 
-def edit(title,content,account):
+def edit(title, content, account):
     pass
     # sqlstr = "update article set title = \"%s\" and content = \"%s\" where account = \"%s\"" % (
     #     title, content, account)
@@ -20,23 +20,40 @@ def edit(title,content,account):
 
 
 def show():
-    pass
-    # sqlstr = 'select article.title,article.account,article.creat_time,article.content,article.article_id,message.content  as m_c ,message.user_id  ,message.time  from article  left outer join message on article.article_id = message.article_id;'
-    # data=DB.execution(DB.select, sqlstr)
-    
-    # return group_msg(data['data'],["m_c","user_id","time","article_id"],"article_id")
+    return list(mongo.db.post.aggregate(
+        [
+            {
+                "$lookup": {
+                    "from": "user",
+                    "localField": "user_id",
+                    "foreignField": "id",
+                    "as": "user_res",
+                }
+            },
+            {"$unwind": "$user_res"},
+            {"$addFields": {"user_name": "$user_res.name"}},
+            {"$unset":["_id","user_res"]}
+        ]
+    ))
 
-def like(message_id,account):
+
+# sqlstr = 'select article.title,article.account,article.creat_time,article.content,article.article_id,message.content  as m_c ,message.user_id  ,message.time  from article  left outer join message on article.article_id = message.article_id;'
+# data=DB.execution(DB.select, sqlstr)
+
+# return group_msg(data['data'],["m_c","user_id","time","article_id"],"article_id")
+
+
+def like(message_id, account):
     pass
     # sqlstr ="insert into like(message_id,account) VALUES (\"%s\",\"%s\")" % (
     #      message_id,account)
     # print(sqlstr)
     # return DB.execution(DB.create, sqlstr)
 
-def message(article_id,user_id,content):
+
+def message(article_id, user_id, content):
     pass
     # sqlstr = "insert into message(article_id,user_id,content) VALUES(\"%s\",\"%s\",\"%s\")" %(
     #     article_id,user_id, content)
     # print(sqlstr)
     # return DB.execution(DB.create ,sqlstr)
-

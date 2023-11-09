@@ -13,13 +13,17 @@ thumb = Blueprint("like", __name__, url_prefix="/like")
 
 @postEdit.route("/", methods=["POST"])
 def po():
-    content = request.json
-    cond = ["title", "content", "user_id",'create_time']
+    cond = ["title", "content", "user_id",'create_time','msg']
     check = checkParm(cond, request.json)
     result = {"success": False, "mes": "新增失敗"}
     check['id']=get_next_id("post")
+    
     if isinstance(check, dict):
-        check['content']=str(check["content"]).replace("\\n", "\n")
+        print("before")
+        print(str(check["content"]))
+        print("after")
+        print(str(check["content"]).replace("\\n", "\n"))
+        check['content']=str(check["content"]).replace("\\\n", "\\n")
         result["mes"] = "新增異常"
         insert_result = postModel.po(check)
         print(insert_result.inserted_id)

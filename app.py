@@ -14,7 +14,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://numbone112:i3PO8xrZj1KRwz83@cluster0.5rqnhen.mongodb.net/argi_food"
+app.config["MONGO_URI"] = "{database uri}"
 mongo.init_app(app) # initialize here!
 print(type(mongo))
 print((mongo.db.name))
